@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-const localCache = {};
+const localCache = {}; //local cache for performance optimization purposes only.
 
 const useBreedList = (animal) => {
   const [breedList, setBreedList] = useState([]);
@@ -23,7 +23,6 @@ const useBreedList = (animal) => {
       fetchBreedList();
     }
   }, [animal, fetchBreedList]);
-
   return breedList;
 };
 

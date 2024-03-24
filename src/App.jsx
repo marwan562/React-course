@@ -1,10 +1,9 @@
-import SearchParams from "./components/SearchParams";
+import SearchParams from "./pages/SearchParams";
 
 // App Component
 const App = () => {
   return (
     <div>
-      <h1>Adopt Me!</h1>
       <SearchParams />
     </div>
   );

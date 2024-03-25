@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import useBreedList from "../hooks/useBreedList";
 import Results from "../components/Results";
+import useBreedQuery from "../hooks/useBreedQuery";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -10,7 +10,9 @@ const SearchParams = () => {
   const [breed, setBreed] = useState("");
   const [pets, setPets] = useState([]);
 
-  const breeds = useBreedList(animal);
+  const breeds = useBreedQuery(animal);
+
+  console.log(breeds);
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);

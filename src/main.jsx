@@ -16,7 +16,9 @@ const queryClient = new QueryClient({
       cacheTime: Infinity,
     },
   },
-});
+}); 
+
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

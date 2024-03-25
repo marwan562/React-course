@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 const localCache = {};
 
 const useDetailsPets = (id) => {
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState(null);
 
   const fetchDetailsPets = useCallback(async () => {
     const res = await fetch(`http://pets-v2.dev-apis.com/pets?id=${id}`);

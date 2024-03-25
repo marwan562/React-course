@@ -1,34 +1,38 @@
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import useDetailsPets from "../hooks/useDetailsPets";
-import Pet from "../components/Pet";
+import Loader from "../components/Loader";
+import useDetailsQuery from "../hooks/useDetailsQuery";
 
 const DetailsPets = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { details, setDetails } = useDetailsPets(id);
+  // const { details, setDetails } = useDetailsPets(id);
 
-  let noneImage = "https://pets-images.dev-apis.com/pets/none.jpg";
-
-  const handleImages =
-    details?.images?.length > 0 ? details?.images[0] : noneImage;
+  const { isLoading, error, isError, data } = useDetailsQuery(id);
+  console.log(data);
 
   const handleBackHome = () => {
     navigate("/");
-    setDetails([]);
   };
+
+  if (isError)
+    return (
+      <div className="details">
+        <p>Error:{error.message}</p>
+      </div>
+    );
+
   return (
     <div className="details">
-      {!Pet ? (
-        <h4>loading...</h4>
-      ) : (
+      {/* react loder spinner for loading */}
+      <Loader data={isLoading} />
+      {/* Results data details animals */}
+      {data && (
         <div>
-          <div className="image-container">
-            <img src={handleImages} alt={details.name} />
-          </div>
-          <h1>{details.name}</h1>
-          <h2>{`${details.animal} - ${details.breed} - ${details.city} - ${details.state}`}</h2>
-          <p>{details.description}</p>
+          <h1>{data.name}</h1>
+          <h2>{`${data?.animal} - ${data?.breed} - ${data?.city} - ${data?.state}`}</h2>
+          <button>Adobt {data?.name}</button>
+          <p>{data?.description}</p>
           <button onClick={handleBackHome}>Back</button>
         </div>
       )}

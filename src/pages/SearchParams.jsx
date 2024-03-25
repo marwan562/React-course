@@ -1,50 +1,55 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Results from "../components/Results";
 import useBreedQuery from "../hooks/useBreedQuery";
+import useFetchPetsQuery from "../hooks/useFetchPetsQuery";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
-  const [location, setLocation] = useState("");
-  const [animal, setAnimal] = useState("");
-  const [breed, setBreed] = useState("");
-  const [pets, setPets] = useState([]);
+  const [searchParams, setSearchParams] = useState({
+    location: "",
+    animal: "",
+    breed: "",
+  });
 
-  const breeds = useBreedQuery(animal);
+  // const { pets, fetchPets } = useFetchPets({ animal, location, breed });
 
-  console.log(breeds);
+  const pets = useFetchPetsQuery(searchParams);
+  console.log(pets);
+
+  const canSave =
+    Boolean(searchParams.location) && Boolean(searchParams.animal);
+
+  const breeds = useBreedQuery(searchParams.animal);
 
   const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+    const location = e.target.value;
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      location,
+    }));
   };
 
   const handleAnimalChange = (e) => {
-    setAnimal(e.target.value);
-    setBreed("");
+    const animal = e.target.value;
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      animal,
+      breed: "", // Reset breed when animal changes
+    }));
   };
 
   const handleBreedChange = (e) => {
-    setBreed(e.target.value);
+    const breed = e.target.value;
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      breed,
+    }));
   };
 
   const handleSubmitChange = (e) => {
     e.preventDefault();
-    fetchPets();
   };
-
-  const fetchPets = async () => {
-    const res = await fetch(
-      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
-    );
-    const json = await res.json();
-    setPets(json.pets);
-  };
-
-  useEffect(() => {
-    if (location) {
-      fetchPets();
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="search-params">
@@ -53,14 +58,20 @@ const SearchParams = () => {
           Location
           <input
             id="location"
-            value={location}
             placeholder="Location"
+            name="location"
+            value={searchParams.location}
             onChange={handleLocationChange}
           />
         </label>
         <label htmlFor="animal">
           Animal
-          <select id="animal" value={animal} onChange={handleAnimalChange}>
+          <select
+            id="animal"
+            name="animal"
+            value={searchParams.animal}
+            onChange={handleAnimalChange}
+          >
             <option />
             {ANIMALS.map((animal) => (
               <option value={animal} key={animal}>
@@ -72,20 +83,21 @@ const SearchParams = () => {
         <label htmlFor="breed">
           Breed
           <select
-            disabled={!breeds.length}
+            disabled={!breeds?.length}
             id="breed"
-            value={breed}
+            name="breed"
+            value={searchParams.breed}
             onChange={handleBreedChange}
           >
             <option />
-            {breeds.map((breed) => (
+            {breeds?.map((breed) => (
               <option key={breed} value={breed}>
                 {breed}
               </option>
             ))}
           </select>
         </label>
-        <button>Submit</button>
+        <button disabled={!canSave}>Submit</button>
       </form>
       <div className="search">
         <Results pets={pets} />

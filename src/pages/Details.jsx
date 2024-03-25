@@ -9,7 +9,6 @@ const DetailsPets = () => {
   // const { details, setDetails } = useDetailsPets(id);
 
   const { isLoading, error, isError, data } = useDetailsQuery(id);
-  console.log(data);
 
   const handleBackHome = () => {
     navigate("/");

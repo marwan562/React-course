@@ -3,7 +3,7 @@ import { getDetailsPets } from "../Api/AnimalsAPI";
 
 const useDetailsQuery = (id) => {
   const { isLoading, error, isError, data } = useQuery(
-    ["userData", id],
+    ["animal", id],
     () => getDetailsPets(id),
     {
       select: (data) => data.pets[0],

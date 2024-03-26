@@ -1,7 +1,11 @@
 import { useQuery } from "react-query";
 import { getBreesPets } from "../Api/AnimalsAPI";
 
-const useBreedQuery = (animal) => {
+type Props = {
+  animal: string
+}
+
+const useBreedQuery = (animal: Props) => {
   const { data } = useQuery(["breed", animal], () => getBreesPets(animal), {
     enabled: !!animal,
   });

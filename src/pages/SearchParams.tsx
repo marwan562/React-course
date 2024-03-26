@@ -3,10 +3,16 @@ import Results from "../components/Results";
 import useBreedQuery from "../hooks/useBreedQuery";
 import useFetchPetsQuery from "../hooks/useFetchPetsQuery";
 
-const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
+type state = {
+  location: string;
+  animal: string;
+  breed: string;
+}
+
+const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"]
 
 const SearchParams = () => {
-  const [searchParams, setSearchParams] = useState({
+  const [searchParams, setSearchParams] = useState<state>({
     location: "",
     animal: "",
     breed: "",
@@ -21,7 +27,7 @@ const SearchParams = () => {
 
   const breeds = useBreedQuery(searchParams.animal);
 
-  const handleLocationChange = (e) => {
+  const handleLocationChange = (e:any) => {
     const location = e.target.value;
     setSearchParams((prevParams) => ({
       ...prevParams,
@@ -29,7 +35,7 @@ const SearchParams = () => {
     }));
   };
 
-  const handleAnimalChange = (e) => {
+  const handleAnimalChange = (e:any) => {
     const animal = e.target.value;
     setSearchParams((prevParams) => ({
       ...prevParams,
@@ -38,7 +44,7 @@ const SearchParams = () => {
     }));
   };
 
-  const handleBreedChange = (e) => {
+  const handleBreedChange = (e:any) => {
     const breed = e.target.value;
     setSearchParams((prevParams) => ({
       ...prevParams,
@@ -46,7 +52,7 @@ const SearchParams = () => {
     }));
   };
 
-  const handleSubmitChange = (e) => {
+  const handleSubmitChange = (e:any) => {
     e.preventDefault();
   };
   return (

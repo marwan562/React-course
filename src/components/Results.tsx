@@ -1,7 +1,10 @@
 import Pet from "./Pet";
+import { Pet as PetType } from "../types/Common";
 
-/* eslint-disable react/prop-types */
-const Results = ({pets}) => {
+type Props = {
+ pets: PetType[]
+}
+const Results = ({pets}:Props) => {
   return (
     <>
       {!pets.length ? (

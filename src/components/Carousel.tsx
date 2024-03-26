@@ -1,9 +1,16 @@
-/* eslint-disable react/prop-types */
 //class Component
 
 import { Component } from "react";
 
-class Carousel extends Component {
+type Props = {
+  image: string[]
+}
+
+type state = {
+  active: string
+}
+
+class Carousel extends Component<Props , state> {
   state = {
     active: this.props.image[0],
   };

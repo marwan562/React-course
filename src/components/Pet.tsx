@@ -9,7 +9,7 @@ type PropsPet = {
   breed: string,
 }
 
-const Pet = (props:PropsPet) => {
+const Pet = (props: PropsPet) => {
   const {id , name , breed , animal , images , city } = props
   let noneImage = "https://pets-images.dev-apis.com/pets/none.jpg";
 

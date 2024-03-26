@@ -8,8 +8,14 @@ export const getFetchPets = async ({ location, breed, animal }) => {
 };
 
 export const getDetailsPets = async (id) => {
-  const res = await axios.get(`http://pets-v2.dev-apis.com/pets?id=${id}`);
-  return res.data;
+  try {
+    const res = await axios.get(`http://pets-v2.dev-apis.com/pets?id=${id}`);
+    return res.data;
+  } catch (err) {
+    if (err) {
+      throw new Error(`Something Error in Request: ${err.message}`);
+    }
+  }
 };
 
 export const getBreesPets = async (animal) => {

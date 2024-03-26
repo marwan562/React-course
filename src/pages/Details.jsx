@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import useDetailsQuery from "../hooks/useDetailsQuery";
+import Carousel from "../components/Carousel";
+import Counter from "../components/Counter";
 
 const DetailsPets = () => {
   const navigate = useNavigate();
@@ -20,7 +22,6 @@ const DetailsPets = () => {
         <p>Error:{error.message}</p>
       </div>
     );
-
   return (
     <div className="details">
       {/* react loder spinner for loading */}
@@ -28,6 +29,8 @@ const DetailsPets = () => {
       {/* Results data details animals */}
       {data && (
         <div>
+          <Counter />
+          <Carousel image={data.images} />
           <h1>{data.name}</h1>
           <h2>{`${data?.animal} - ${data?.breed} - ${data?.city} - ${data?.state}`}</h2>
           <button>Adobt {data?.name}</button>

@@ -7,6 +7,7 @@ const useDetailsQuery = (id) => {
     () => getDetailsPets(id),
     {
       select: (data) => data.pets[0],
+      enabled: !!id,
     }
   );
   return { isLoading, error, isError, data };

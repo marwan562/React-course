@@ -15,7 +15,6 @@ const SearchParams = () => {
   // const { pets, fetchPets } = useFetchPets({ animal, location, breed });
 
   const pets = useFetchPetsQuery(searchParams);
-  console.log(pets);
 
   const canSave =
     Boolean(searchParams.location) && Boolean(searchParams.animal);
@@ -50,7 +49,6 @@ const SearchParams = () => {
   const handleSubmitChange = (e) => {
     e.preventDefault();
   };
-
   return (
     <div className="search-params">
       <form onSubmit={handleSubmitChange}>

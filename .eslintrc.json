@@ -2,7 +2,7 @@
     "env": {
       "browser": true,
       "es2021": true,
-      "node": true
+      "node": true,
     },
     "extends": [
       "eslint:recommended",
@@ -30,7 +30,7 @@
       },
       "import/resolver": {
         "node": {
-          "extensions": [".js", ".jsx"]
+          "extensions": [".js", ".jsx",".ts", ".tsx"]
         }
       }
     }

@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 
-/* eslint-disable react/prop-types */
-const Pet = ({ name, animal, breed, images, city, id }) => {
+type PropsPet = {
+  id:number,
+  name: string,
+  animal: string,
+  images: string[],
+  city: string,
+  breed: string,
+}
+
+const Pet = (props:PropsPet) => {
+  const {id , name , breed , animal , images , city } = props
   let noneImage = "https://pets-images.dev-apis.com/pets/none.jpg";
 
   const handleImages = images.length > 0 ? images[0] : noneImage;

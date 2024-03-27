@@ -9,7 +9,7 @@ class Counter extends Component {
     return (
       <div>
         <h1> {active} </h1>
-        <div className="" style={{ display: "flex" }}>
+        <div className="counter" >
           <button onClick={() => this.setState({ active: active + 1 })}>
             Increment
           </button>

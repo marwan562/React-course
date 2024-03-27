@@ -1,12 +1,13 @@
 import { useQuery } from "react-query";
 import { getFetchPets } from "../Api/AnimalsAPI";
+import {SearchParamsType} from "../types/Common";
 
-const useFetchPetsQuery = (SearchParams) => {
+const useFetchPetsQuery = (searchParams : SearchParamsType) => {
   const petsQuery = useQuery(
-    ["pets", SearchParams],
-    () => getFetchPets(SearchParams),
+    ["pets", searchParams],
+     getFetchPets,
     {
-      enabled: !!SearchParams,
+      enabled: !!searchParams,
     }
   );
   return petsQuery?.data?.pets || [];

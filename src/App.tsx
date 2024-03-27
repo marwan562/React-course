@@ -1,12 +1,11 @@
-import SearchParams from "./pages/SearchParams";
+// import  ReactElement  from "./Deezer HOC/ReactElement";
+// // App Component
+// const App = () => {
+//   return (
+//     <div>
+//       <ReactElement></ReactElement>
+//     </div>
+//   );
+// };
 
-// App Component
-const App = () => {
-  return (
-    <div>
-      <SearchParams />
-    </div>
-  );
-};
-
-export default App;
+// export default App;

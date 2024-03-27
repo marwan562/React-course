@@ -4,28 +4,34 @@ import Loader from "../components/Loader";
 import useDetailsQuery from "../hooks/useDetailsQuery";
 import Carousel from "../components/Carousel";
 import Counter from "../components/Counter";
+import { useGetPenQuery } from "../Services/pet";
+import { Pet } from "../types/Common";
 
 const DetailsPets = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   // const { details, setDetails } = useDetailsPets(id);
 
-  const { isLoading, error, isError, data } = useDetailsQuery(id);
+  if (!id) {
+    throw new Error('no id provided to detailsPets');
+  }
+
+  const query = useGetPenQuery(+id)
+  const data = query?.data?.pets[0] as Pet
 
   const handleBackHome = () => {
     navigate("/");
   };
-
-  if (isError)
+  if (query.isError)
     return (
       <div className="details">
-        <p>Error:{error.message}</p>
+        <p>Error:{(query.error as Error).message}</p>
       </div>
     );
   return (
     <div className="details">
       {/* react loder spinner for loading */}
-      <Loader data={isLoading} />
+      <Loader data={query.isLoading} />
       {/* Results data details animals */}
       {data && (
         <div>

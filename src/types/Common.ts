@@ -7,5 +7,25 @@ export interface Pet {
     breed: string;
     city: string;
     description: string;
+    state:string
     images: string[];
+}
+
+export interface PetsAPIResponse {
+    numberOfResults: number;
+    startIndex:      number;
+    endIndex:        number;
+    hasNext:         boolean;
+    pets:            Pet[];
+}
+
+export interface SearchParamsType {
+    location: string;
+    animal:Animal;
+    breed:string;
+}
+
+export interface BreedsAPIResponse {
+    animal: string;
+    breeds: string[];
 }
